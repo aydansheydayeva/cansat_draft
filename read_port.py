@@ -83,7 +83,7 @@ def print_table():   #just its data
 def clear_database():
     cursor.execute("DELETE from dataToPlot")
     connection.commit()
-
+'''
 def data_to_csv():
     with open("practice.csv", "w", newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
@@ -96,6 +96,21 @@ def data_to_csv():
 
 def clear_csvfile():
     pass   #how to clear csv file
+'''
+
+def data_to_csv(strng):
+    with open("practice.csv", "a", newline = '') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter = ',')   #delimiter unnecessary?
+        #csv_writer.writerow([i[0] for i in cursor.description])
+        #strng = "001,2,3,97.03,499.85,10.00,36.01,40.00,0,1000,0,0,0,"
+        
+        pr = strng.split(",")
+        csv_writer.writerow(pr)
+def clear_csvfile():
+    #os.remove('practice.csv')   removes the whole file from the filesystem
+    f = open('practice.csv', 'w')   #only removes content
+    f.truncate()
+    f.close()
 
 def data_to_plot():   #not for dynamic
     cursor.execute("SELECT * FROM dataToPlot")
